@@ -13,5 +13,5 @@ get_data <- function(user_city, user_state) {
   
   query <- paste0(base_url, key_parameter, key, required_parameters)
   data <- fromJSON(query)
-  return(data)
+  return(data$result)
 }
