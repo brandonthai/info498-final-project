@@ -22,14 +22,18 @@ shinyUI(
             sliderInput("numofbeds", "Number of Beds:", min = 1, max = 10, value = 2, step = 1),
             sliderInput("maxdistance", "Search Radius (Km):", min = 0.01, max = 200, value = 10, step = 5),
             sliderInput("price", "Price Range:", min = 0, max = 1000, value = c(250, 750)),
-            selectInput("resultsperpage", label = ("Number of Results:"), choices = list(15, 20, 25, 30, 40, 45, 50), selected = 15)
+            selectInput("resultsperpage", label = ("Number of Results:"), choices = list(15, 20, 25, 30, 40, 45, 50), selected = 25)
           )
       ),
       column(9,
             mainPanel(
-              dataTableOutput('mytable')
+              plotlyOutput('plot')
             )
       )
     )
   )
 )
+
+
+
+

@@ -20,16 +20,20 @@ get_data <- function(queryData) {
   
   required_parameters <- paste0(
     "&guest=", guests,
-    #"&isinstantbook=", isinstantbook,
+    "&isinstantbook=", isinstantbook,
     "&latitude=", lat,
     "&longitude=", lng,
-    #"&maxdistance=", maxdistance,
-    #"&numofbathrooms=", numofbathrooms,
-    #"&numofbedrooms=", numofbedrooms,
-    #"&numofbeds=", numofbeds,
+    "&maxdistance=", maxdistance,
+    "&numofbathrooms=", numofbathrooms,
+    "&numofbedrooms=", numofbedrooms,
+    "&numofbeds=", numofbeds,
     "&resultsperpage=", resultsperpage)
   
   query <- paste0(base_url, key_parameter, key, required_parameters)
   data <- fromJSON(query)
   return(data$result)
 }
+
+
+
+
