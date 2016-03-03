@@ -25,10 +25,8 @@ shinyUI(
             selectInput("resultsperpage", label = ("Number of Results:"), choices = list(15, 20, 25, 30, 40, 45, 50), selected = 25)
           )
       ),
-      column(9,
-            mainPanel(
-              plotlyOutput('plot')
-            )
+      mainPanel(
+            plotlyOutput('plot')
       )
     )
   )

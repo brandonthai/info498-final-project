@@ -3,7 +3,7 @@ source('scripts/build_map.R')
 
 shinyServer(function(input, output) {
   # Create a map via your build_map function
-    output$plot = renderDataTable({
+    output$plot = renderPlotly({
       build_map(queryData <- list(
         city = input$city,
         state = input$state,
@@ -15,8 +15,7 @@ shinyServer(function(input, output) {
         numofbeds = input$numofbeds,
         pricemax = input$price[1],
         pricemin = input$price[2],
-        resultsperpage = input$resultsperpage
-      ))
+        resultsperpage = input$resultsperpage))
     })
 })
 
