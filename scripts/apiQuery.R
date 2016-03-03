@@ -1,15 +1,33 @@
 library(jsonlite)
 source('scripts/getLatLng.R')
 
-get_data <- function(user_city, user_state) {
+get_data <- function(queryData) {
   base_url <- "https://zilyo.p.mashape.com/search?"
   key_parameter <- "mashape-key="
   key <- "nowlV7qpGSmshTJ2jv6AeLUAGUrjp1632Pzjsn40XflJySxVK5"
-  latlng <- getLatLng(user_city, user_state)
+  guests <- queryData$guests
+  isinstantbook <- queryData$isinstantbook
+  latlng <- getLatLng(queryData$city, queryData$state)
   lat <- latlng$lat
   lng <- latlng$lon
+  maxdistance <- queryData$maxdistance
+  numofbathrooms <- queryData$numofbathrooms
+  numofbedrooms <- queryData$numofbedrooms
+  numofbeds <- queryData$numofbeds
+  pricemax <- queryData$maxprice[1]
+  pricemin <- queryData$minprice[2]
+  resultsperpage <- queryData$resultsperpage
   
-  required_parameters <- paste0("&latitude=", lat, "&longitude=", lng)
+  required_parameters <- paste0(
+    "&guest=", guests,
+    #"&isinstantbook=", isinstantbook,
+    "&latitude=", lat,
+    "&longitude=", lng,
+    #"&maxdistance=", maxdistance,
+    #"&numofbathrooms=", numofbathrooms,
+    #"&numofbedrooms=", numofbedrooms,
+    #"&numofbeds=", numofbeds,
+    "&resultsperpage=", resultsperpage)
   
   query <- paste0(base_url, key_parameter, key, required_parameters)
   data <- fromJSON(query)
