@@ -6,6 +6,7 @@ get_data <- function(queryData) {
   key_parameter <- "mashape-key="
   key <- "nowlV7qpGSmshTJ2jv6AeLUAGUrjp1632Pzjsn40XflJySxVK5"
   guests <- queryData$guests
+  provider <- queryData$provider
   isinstantbook <- queryData$isinstantbook
   latlng <- getLatLng(queryData$city, queryData$state)
   lat <- latlng$lat
@@ -18,22 +19,30 @@ get_data <- function(queryData) {
   pricemin <- queryData$minprice[2]
   resultsperpage <- queryData$resultsperpage
   
+  
   required_parameters <- paste0(
-    #"&guest=", guests,
-    #"&isinstantbook=", isinstantbook,
     "&latitude=", lat,
     "&longitude=", lng,
-    #"&maxdistance=", maxdistance,
-    #"&numofbathrooms=", numofbathrooms,
-    #"&numofbedrooms=", numofbedrooms,
-    #"&numofbeds=", numofbeds,
-    "&resultsperpage=", 50)
+    "&maxdistance=", maxdistance,
+    "&provider=", provider,
+    "&resultsperpage=", 50
+  )
   
   query <- paste0(base_url, key_parameter, key, required_parameters)
+  print(query)
   data <- fromJSON(query)
-  print(data$result)
-  return(data$result)
+  data <- data$result
+  data <- flatten(data)
+  data <- filter(data,
+                 attr.occupancy >= guests,
+                 attr.instantBookable == isinstantbook,
+                 attr.bathrooms >= numofbathrooms,
+                 attr.bedrooms >= numofbedrooms,
+                 attr.beds >= numofbeds)
+  return(data)
 }
+
+
 
 
 

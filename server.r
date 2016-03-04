@@ -9,6 +9,7 @@ shinyServer(function(input, output) {
         city = input$city,
         state = input$state,
         guests = input$guests,
+        provider = input$provider,
         isinstantbook = input$isinstantbook,
         maxdistance = input$maxdistance,
         numofbathrooms = input$numofbathrooms,
@@ -19,6 +20,5 @@ shinyServer(function(input, output) {
         resultsperpage = input$resultsperpage))
     })
 })
-
 
 
