@@ -8,6 +8,7 @@ build_map <- function(queryData) {
   lng <- unlist(lapply(data$latLng, unlist))[seq(2, nrow(data)*2, 2)]
   data$latitude = lat
   data$longitude = lng
+  View(data)
 #  points <- function() {
 #     cbind(data$latitude, data$longitude)
 #   }
