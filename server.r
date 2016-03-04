@@ -3,7 +3,7 @@ source('scripts/build_map.R')
 
 shinyServer(function(input, output) {
   # Create a map via your build_map function
-    output$plot = renderPlotly({
+    output$mymap <- renderLeaflet({
       build_map(queryData <- list(
         city = input$city,
         state = input$state,

@@ -8,9 +8,14 @@ build_map <- function(queryData) {
   lng <- unlist(lapply(data$latLng, unlist))[seq(2, nrow(data)*2, 2)]
   data$latitude = lat
   data$longitude = lng
-  p <- plot_ly(data, lat = latitude, lon = longitude, type = 'scattergeo', locationmode = 'USA-states', mode = 'markers') %>%
-    layout(title = 'Most trafficked US airports<br>(Hover for airport)')
-  return(p)
+#  points <- function() {
+#     cbind(data$latitude, data$longitude)
+#   }
+    
+  m <- leaflet() %>%
+    addTiles() %>%  # Add default OpenStreetMap map tiles
+    addMarkers(data, lat = data$latitude, lng = data$longitude)
+  return(m)
 }
 
   

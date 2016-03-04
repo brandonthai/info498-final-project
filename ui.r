@@ -26,7 +26,7 @@ shinyUI(
           )
       ),
       mainPanel(
-            plotlyOutput('plot')
+        leafletOutput('mymap')
       )
     )
   )
