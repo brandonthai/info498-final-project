@@ -1,5 +1,6 @@
 library(shiny)
-source('scripts/build_map.R')
+library(leaflet)
+source('scripts/build_map.r')
 
 shinyServer(function(input, output) {
   # Create a map via your build_map function

@@ -1,6 +1,7 @@
 library(plotly)
 library(dplyr)
-source('scripts/apiQuery.R')
+library(leaflet)
+source('scripts/apiQuery.r')
 
 build_map <- function(queryData) {
   data <- get_data(queryData)
@@ -8,7 +9,7 @@ build_map <- function(queryData) {
   lng <- unlist(lapply(data$latLng, unlist))[seq(2, nrow(data)*2, 2)]
   data$latitude = lat
   data$longitude = lng
-  View(data)
+  #View(data)
 #  points <- function() {
 #     cbind(data$latitude, data$longitude)
 #   }

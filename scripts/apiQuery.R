@@ -1,5 +1,5 @@
 library(jsonlite)
-source('scripts/getLatLng.R')
+source('scripts/getLatLng.r')
 
 get_data <- function(queryData) {
   base_url <- "https://zilyo.p.mashape.com/search?"
