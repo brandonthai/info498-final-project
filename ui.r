@@ -32,8 +32,8 @@ shinyUI(
             selectInput("provider", label = ("Select a Provider"), choices = providers),
             sliderInput("numofbathrooms", label = "Number of Bathrooms:", min = 1, max = 10, value = 1, step = 1),
             sliderInput("numofbedrooms", label = "Number of Bedrooms:", min = 0, max = 10, value = 0, step = 1),
-            sliderInput("numofbeds", label = "Number of Beds:", min = 1, max = 10, value = 1, step = 1)
-            #sliderInput("maxdistance", label = "Search Radius (Km):", min = 0.01, max = 200, value = 10, step = 5)
+            sliderInput("numofbeds", label = "Number of Beds:", min = 1, max = 10, value = 1, step = 1),
+            sliderInput("maxdistance", label = "Search Radius (Km):", min = 1, max = 35, value = 5, step = 1)
           )
       ),
       column(9,

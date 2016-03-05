@@ -2,8 +2,8 @@ name: info498-final-project
 account: kevinly7
 server: shinyapps.io
 appId: 87066
-bundleId: 387866
+bundleId: 387968
 url: https://kevinly7.shinyapps.io/info498-final-project/
-when: 1457130599.95654
+when: 1457144615.71511
 asMultiple: FALSE
 asStatic: FALSE

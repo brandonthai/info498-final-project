@@ -11,7 +11,7 @@ get_data <- function(queryData) {
   latlng <- getLatLng(queryData$city, queryData$state)
   lat <- latlng$lat
   lng <- latlng$lon
-  #maxdistance <- queryData$maxdistance
+  maxdistance <- queryData$maxdistance
   numofbathrooms <- queryData$numofbathrooms
   numofbedrooms <- queryData$numofbedrooms
   numofbeds <- queryData$numofbeds
@@ -23,7 +23,7 @@ get_data <- function(queryData) {
   required_parameters1 <- paste0(
     "&latitude=", lat,
     "&longitude=", lng,
-    "&maxdistance=", 50,
+    "&maxdistance=", maxdistance,
     "&provider=", provider,
     "&resultsperpage=", 50,
     "&page=1" 
@@ -32,7 +32,7 @@ get_data <- function(queryData) {
   required_parameters2 <- paste0(
     "&latitude=", lat,
     "&longitude=", lng,
-    "&maxdistance=", 50,
+    "&maxdistance=", maxdistance,
     "&provider=", provider,
     "&resultsperpage=", 50,
     "&page=2" 
@@ -41,7 +41,7 @@ get_data <- function(queryData) {
   required_parameters3 <- paste0(
     "&latitude=", lat,
     "&longitude=", lng,
-    "&maxdistance=", 50,
+    "&maxdistance=", maxdistance,
     "&provider=", provider,
     "&resultsperpage=", 50,
     "&page=3" 
@@ -50,7 +50,7 @@ get_data <- function(queryData) {
   required_parameters4 <- paste0(
     "&latitude=", lat,
     "&longitude=", lng,
-    "&maxdistance=", 50,
+    "&maxdistance=", maxdistance,
     "&provider=", provider,
     "&resultsperpage=", 50,
     "&page=4" 
@@ -59,7 +59,7 @@ get_data <- function(queryData) {
   required_parameters5 <- paste0(
     "&latitude=", lat,
     "&longitude=", lng,
-    "&maxdistance=", 50,
+    "&maxdistance=", maxdistance,
     "&provider=", provider,
     "&resultsperpage=", 50,
     "&page=5" 
@@ -68,7 +68,7 @@ get_data <- function(queryData) {
   required_parameters6 <- paste0(
     "&latitude=", lat,
     "&longitude=", lng,
-    "&maxdistance=", 50,
+    "&maxdistance=", maxdistance,
     "&provider=", provider,
     "&resultsperpage=", 50,
     "&page=6" 
@@ -98,34 +98,33 @@ get_data <- function(queryData) {
   data1 <- flatten(data1)
   combinedData <- data1
   
-  print(data2)
   
-  if(nrow(data2) != 0) {
+  if(!is.null(nrow(data2))) {
     data2 <- flatten(data2)
     combinedData <- rbind(combinedData, data2)
   }
   
-  if(nrow(data3) != NULL) {
+  if(!is.null(nrow(data3))) {
     data3 <- flatten(data3)
     combinedData <- rbind(combinedData, data3)
   }
   
-  if(nrow(data4) != NULL) {
+  if(!is.null(nrow(data4))) {
     data4 <- flatten(data4)
     combinedData <- rbind(combinedData, data4)
   }
   
-  if(nrow(data5) != NULL) {
+  if(!is.null(nrow(data5))) {
     data5 <- flatten(data5)
     combinedData <- rbind(combinedData, data5)
   }
   
-  if(nrow(data6) != NULL) {
+  if(!is.null(nrow(data6))) {
     data6 <- flatten(data6)
     combinedData <- rbind(combinedData, data6)
   }
   
-  View(combinedData)
+  #View(combinedData)
   
   if(isinstantbook){
     combinedData <- filter(combinedData,
@@ -143,8 +142,6 @@ get_data <- function(queryData) {
   }
   return(combinedData)
 }
-
-
 
 
 
