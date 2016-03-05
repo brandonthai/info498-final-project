@@ -11,36 +11,139 @@ get_data <- function(queryData) {
   latlng <- getLatLng(queryData$city, queryData$state)
   lat <- latlng$lat
   lng <- latlng$lon
-  maxdistance <- queryData$maxdistance
+  #maxdistance <- queryData$maxdistance
   numofbathrooms <- queryData$numofbathrooms
   numofbedrooms <- queryData$numofbedrooms
   numofbeds <- queryData$numofbeds
-  pricemax <- queryData$maxprice[1]
-  pricemin <- queryData$minprice[2]
-  resultsperpage <- queryData$resultsperpage
+  #pricemax <- queryData$maxprice[1]
+  #pricemin <- queryData$minprice[2]
+  #resultsperpage <- queryData$resultsperpage
+  #page <- queryData$page
   
-  
-  required_parameters <- paste0(
+  required_parameters1 <- paste0(
     "&latitude=", lat,
     "&longitude=", lng,
-    "&maxdistance=", maxdistance,
+    "&maxdistance=", 50,
     "&provider=", provider,
-    "&resultsperpage=", 50
+    "&resultsperpage=", 50,
+    "&page=1" 
   )
   
-  query <- paste0(base_url, key_parameter, key, required_parameters)
-  print(query)
-  data <- fromJSON(query)
-  data <- data$result
-  data <- flatten(data)
-  data <- filter(data,
-                 attr.occupancy >= guests,
-                 attr.instantBookable == isinstantbook,
-                 attr.bathrooms >= numofbathrooms,
-                 attr.bedrooms >= numofbedrooms,
-                 attr.beds >= numofbeds)
-  return(data)
+  required_parameters2 <- paste0(
+    "&latitude=", lat,
+    "&longitude=", lng,
+    "&maxdistance=", 50,
+    "&provider=", provider,
+    "&resultsperpage=", 50,
+    "&page=2" 
+  )
+  
+  required_parameters3 <- paste0(
+    "&latitude=", lat,
+    "&longitude=", lng,
+    "&maxdistance=", 50,
+    "&provider=", provider,
+    "&resultsperpage=", 50,
+    "&page=3" 
+  )
+  
+  required_parameters4 <- paste0(
+    "&latitude=", lat,
+    "&longitude=", lng,
+    "&maxdistance=", 50,
+    "&provider=", provider,
+    "&resultsperpage=", 50,
+    "&page=4" 
+  )
+  
+  required_parameters5 <- paste0(
+    "&latitude=", lat,
+    "&longitude=", lng,
+    "&maxdistance=", 50,
+    "&provider=", provider,
+    "&resultsperpage=", 50,
+    "&page=5" 
+  )
+  
+  required_parameters6 <- paste0(
+    "&latitude=", lat,
+    "&longitude=", lng,
+    "&maxdistance=", 50,
+    "&provider=", provider,
+    "&resultsperpage=", 50,
+    "&page=6" 
+  )
+  
+  query1 <- paste0(base_url, key_parameter, key, required_parameters1)
+  query2 <- paste0(base_url, key_parameter, key, required_parameters2)
+  query3 <- paste0(base_url, key_parameter, key, required_parameters3)
+  query4 <- paste0(base_url, key_parameter, key, required_parameters4)
+  query5 <- paste0(base_url, key_parameter, key, required_parameters5)
+  query6 <- paste0(base_url, key_parameter, key, required_parameters6)
+  
+  data1 <- fromJSON(query1)
+  data2 <- fromJSON(query2)
+  data3 <- fromJSON(query3)
+  data4 <- fromJSON(query4)
+  data5 <- fromJSON(query5)
+  data6 <- fromJSON(query6)
+
+  data1 <- data1$result
+  data2 <- data2$result
+  data3 <- data3$result
+  data4 <- data4$result
+  data5 <- data5$result
+  data6 <- data6$result
+  
+  data1 <- flatten(data1)
+  combinedData <- data1
+  
+  print(data2)
+  
+  if(nrow(data2) != 0) {
+    data2 <- flatten(data2)
+    combinedData <- rbind(combinedData, data2)
+  }
+  
+  if(nrow(data3) != NULL) {
+    data3 <- flatten(data3)
+    combinedData <- rbind(combinedData, data3)
+  }
+  
+  if(nrow(data4) != NULL) {
+    data4 <- flatten(data4)
+    combinedData <- rbind(combinedData, data4)
+  }
+  
+  if(nrow(data5) != NULL) {
+    data5 <- flatten(data5)
+    combinedData <- rbind(combinedData, data5)
+  }
+  
+  if(nrow(data6) != NULL) {
+    data6 <- flatten(data6)
+    combinedData <- rbind(combinedData, data6)
+  }
+  
+  View(combinedData)
+  
+  if(isinstantbook){
+    combinedData <- filter(combinedData,
+                   attr.occupancy >= guests,
+                   attr.instantBookable == isinstantbook,
+                   attr.bathrooms >= numofbathrooms,
+                   attr.bedrooms >= numofbedrooms,
+                   attr.beds >= numofbeds)
+  } else{
+    combinedData <- filter(combinedData,
+                   attr.occupancy >= guests,
+                   attr.bathrooms >= numofbathrooms,
+                   attr.bedrooms >= numofbedrooms,
+                   attr.beds >= numofbeds)
+  }
+  return(combinedData)
 }
+
 
 
 

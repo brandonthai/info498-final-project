@@ -27,17 +27,17 @@ shinyUI(
           wellPanel(
             h3("Filter Results"),
             checkboxInput("isinstantbook", label = "Check for Instant Book only", value = FALSE),
+            #numericInput("pagenumber", label = "Page:", value = 1),
             numericInput("guests", label = ("Number of Guests:"), value = 1),
             selectInput("provider", label = ("Select a Provider"), choices = providers),
-            sliderInput("numofbathrooms", "Number of Bathrooms:", min = 1, max = 10, value = 1, step = 1),
-            sliderInput("numofbedrooms", "Number of Bedrooms:", min = 1, max = 10, value = 1, step = 1),
-            sliderInput("numofbeds", "Number of Beds:", min = 1, max = 10, value = 1, step = 1),
-            sliderInput("maxdistance", "Search Radius (Km):", min = 0.01, max = 200, value = 10, step = 5)
-            #sliderInput("price", "Price Range:", min = 0, max = 1000, value = c(250, 750))
+            sliderInput("numofbathrooms", label = "Number of Bathrooms:", min = 1, max = 10, value = 1, step = 1),
+            sliderInput("numofbedrooms", label = "Number of Bedrooms:", min = 0, max = 10, value = 0, step = 1),
+            sliderInput("numofbeds", label = "Number of Beds:", min = 1, max = 10, value = 1, step = 1)
+            #sliderInput("maxdistance", label = "Search Radius (Km):", min = 0.01, max = 200, value = 10, step = 5)
           )
       ),
       column(9,
-          leafletOutput('mymap', height = 750)
+          leafletOutput('mymap', height = 700)
       )
     )
   )

@@ -11,14 +11,19 @@ shinyServer(function(input, output) {
         guests = input$guests,
         provider = input$provider,
         isinstantbook = input$isinstantbook,
-        maxdistance = input$maxdistance,
+        #maxdistance = input$maxdistance,
         numofbathrooms = input$numofbathrooms,
         numofbedrooms = input$numofbedrooms,
-        numofbeds = input$numofbeds,
-        pricemax = input$price[1],
-        pricemin = input$price[2],
-        resultsperpage = input$resultsperpage))
+        numofbeds = input$numofbeds
+        #pricemax = input$price[1],
+        #pricemin = input$price[2]
+        #resultsperpage = input$resultsperpage,
+        #page = input$pagenumber))
+      ))
     })
 })
+
+
+
 
 
