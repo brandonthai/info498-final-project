@@ -4,7 +4,7 @@ source('scripts/apiQuery.r')
 
 build_map <- function(queryData) {
   data <- get_data(queryData)
-  View(data)
+  #View(data)
   if(!is.null(nrow(data))) {
     lat <- unlist(lapply(data$latLng, unlist))[seq(1, nrow(data)*2, 2)]
     lng <- unlist(lapply(data$latLng, unlist))[seq(2, nrow(data)*2, 2)]
