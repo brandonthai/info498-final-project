@@ -19,8 +19,8 @@ shinyUI(
     fluidRow(
       column(3,
           wellPanel(
-            textInput("city", "Enter a city:", value = 'Chelan'),
-            textInput("state", "Enter a state:", value = 'WA'),
+            textInput("city", "Enter a city (ie. Seattle):", value = 'Chelan'),
+            textInput("state", "Enter a state (ie. WA):", value = 'WA'),
             actionButton("submit", "Submit")
           ),
           wellPanel(
