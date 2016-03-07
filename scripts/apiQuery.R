@@ -11,6 +11,12 @@ get_data <- function(queryData) {
   latlng <- getLatLng(queryData$city, queryData$state)
   lat <- latlng$lat
   lng <- latlng$lon
+  print(lat)
+  print(lng)
+  print(typeof(lat))
+  if(is.na(lat) || is.na(lng)) {
+    return("Location not found")
+  }
   maxdistance <- queryData$maxdistance
   numofbathrooms <- queryData$numofbathrooms
   numofbedrooms <- queryData$numofbedrooms
@@ -19,7 +25,6 @@ get_data <- function(queryData) {
   #pricemin <- queryData$minprice[2]
   #resultsperpage <- queryData$resultsperpage
   #page <- queryData$page
-  
   required_parameters1 <- paste0(
     "&latitude=", lat,
     "&longitude=", lng,

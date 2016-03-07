@@ -25,7 +25,17 @@ shinyServer(function(input, output) {
   
   # Display the map to UI 
   output$mymap <- renderLeaflet({
-      displayMap()
+    
+    # Create a Progress object
+    progress <- shiny::Progress$new()
+    # Make sure it closes when we exit this reactive, even if there's an error
+    on.exit(progress$close())
+    
+    searchMessage <- paste0("Looking for rentals in ", input$city, ", ", input$state,".", " Please Wait...")
+    
+    progress$set(message = searchMessage)
+    
+    displayMap()
   })
 })
 
