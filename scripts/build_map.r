@@ -22,7 +22,7 @@ build_map <- function(queryData) {
           '<h5>Price per week: $', weekly, '</h5>',
           '<h5>Price per month: $', monthly, '</h5>',
           "<a href='", link, "'>Link to provider's listing.</a> </br> </br>",
-          '<img heigth=150, width=150, src="', unlist(photo['large1']), '">'
+          '<img heigth=150, width=150, src="', unlist(photo), '">'
     )
   }
   
@@ -31,12 +31,12 @@ build_map <- function(queryData) {
   cityLng <- latlng$lon
   
   if(!is.null(nrow(data))) {
-    map <- leaflet(data) %>%
+    map <- leaflet() %>%
       addTiles() %>%  # Add default OpenStreetMap map tiles
-      addMarkers(
+      addMarkers(data,
                  lat = data$latitude,
                  lng = data$longitude,
-                 clusterOptions = markerClusterOptions(),
+                 #clusterOptions = markerClusterOptions(),
                  popup = content(data$attr.heading,
                                  data$attr.beds,
                                  data$attr.bedrooms,
@@ -58,5 +58,7 @@ build_map <- function(queryData) {
 
   
   
+
+
 
 
