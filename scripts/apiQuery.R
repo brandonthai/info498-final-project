@@ -95,9 +95,11 @@ get_data <- function(queryData) {
   data5 <- data5$result
   data6 <- data6$result
   
-  data1 <- flatten(data1)
-  combinedData <- data1
+  if(!is.null(nrow(data1))) {
+    data1 <- flatten(data1)
+  }
   
+  combinedData <- data1
   
   if(!is.null(nrow(data2))) {
     data2 <- flatten(data2)
@@ -126,21 +128,24 @@ get_data <- function(queryData) {
   
   #View(combinedData)
   
-  if(isinstantbook){
+  if(is.null(nrow(data4))){
+    return(combinedData)
+  } else if(isinstantbook){
     combinedData <- filter(combinedData,
                    attr.occupancy >= guests,
                    attr.instantBookable == isinstantbook,
                    attr.bathrooms >= numofbathrooms,
                    attr.bedrooms >= numofbedrooms,
                    attr.beds >= numofbeds)
+    return(combinedData)
   } else{
     combinedData <- filter(combinedData,
                    attr.occupancy >= guests,
                    attr.bathrooms >= numofbathrooms,
                    attr.bedrooms >= numofbedrooms,
                    attr.beds >= numofbeds)
+    return(combinedData)
   }
-  return(combinedData)
 }
 
 
