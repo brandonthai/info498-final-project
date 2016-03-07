@@ -21,7 +21,7 @@ shinyUI(
           wellPanel(
             textInput("city", "Enter a city (ie. Seattle):", value = 'Chelan'),
             textInput("state", "Enter a state (ie. WA):", value = 'WA'),
-            actionButton("submit", "Submit")
+            actionButton("submit", "Search")
           ),
           wellPanel(
             h3("Filter Results"),
