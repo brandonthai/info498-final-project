@@ -1,5 +1,5 @@
 library(jsonlite)
-source('scripts/getLatLng.r')
+source('scripts/get_lat_lng.r')
 
 get_data <- function(queryData) {
   base_url <- "https://zilyo.p.mashape.com/search?"
@@ -18,61 +18,13 @@ get_data <- function(queryData) {
   numofbathrooms <- queryData$numofbathrooms
   numofbedrooms <- queryData$numofbedrooms
   numofbeds <- queryData$numofbeds
-  #pricemax <- queryData$maxprice[1]
-  #pricemin <- queryData$minprice[2]
-  required_parameters1 <- paste0(
-    "&latitude=", lat,
-    "&longitude=", lng,
-    "&maxdistance=", maxdistance,
-    "&provider=", provider,
-    "&resultsperpage=", 50,
-    "&page=1" 
-  )
   
-  required_parameters2 <- paste0(
-    "&latitude=", lat,
-    "&longitude=", lng,
-    "&maxdistance=", maxdistance,
-    "&provider=", provider,
-    "&resultsperpage=", 50,
-    "&page=2" 
-  )
-  
-  required_parameters3 <- paste0(
-    "&latitude=", lat,
-    "&longitude=", lng,
-    "&maxdistance=", maxdistance,
-    "&provider=", provider,
-    "&resultsperpage=", 50,
-    "&page=3" 
-  )
-  
-  required_parameters4 <- paste0(
-    "&latitude=", lat,
-    "&longitude=", lng,
-    "&maxdistance=", maxdistance,
-    "&provider=", provider,
-    "&resultsperpage=", 50,
-    "&page=4" 
-  )
-  
-  required_parameters5 <- paste0(
-    "&latitude=", lat,
-    "&longitude=", lng,
-    "&maxdistance=", maxdistance,
-    "&provider=", provider,
-    "&resultsperpage=", 50,
-    "&page=5" 
-  )
-  
-  required_parameters6 <- paste0(
-    "&latitude=", lat,
-    "&longitude=", lng,
-    "&maxdistance=", maxdistance,
-    "&provider=", provider,
-    "&resultsperpage=", 50,
-    "&page=6" 
-  )
+  required_parameters1 <- pasteURL(lat, lng, maxdistance, provider, 1)
+  required_parameters2 <- pasteURL(lat, lng, maxdistance, provider, 2)
+  required_parameters3 <- pasteURL(lat, lng, maxdistance, provider, 3)
+  required_parameters4 <- pasteURL(lat, lng, maxdistance, provider, 4)
+  required_parameters5 <- pasteURL(lat, lng, maxdistance, provider, 5)
+  required_parameters6 <- pasteURL(lat, lng, maxdistance, provider, 6)
   
   query1 <- paste0(base_url, key_parameter, key, required_parameters1)
   query2 <- paste0(base_url, key_parameter, key, required_parameters2)
@@ -131,23 +83,36 @@ get_data <- function(queryData) {
   if(is.null(nrow(data4))){
     return(combinedData)
   } else if(isinstantbook){
-    combinedData <- filter(combinedData,
-                   attr.occupancy >= guests,
-                   attr.instantBookable == isinstantbook,
-                   attr.bathrooms >= numofbathrooms,
-                   attr.bedrooms >= numofbedrooms,
-                   attr.beds >= numofbeds)
+    combinedData <- combinedData %>%
+                      filter(attr.occupancy >= guests,
+                             attr.instantBookable == isinstantbook,
+                             attr.bathrooms >= numofbathrooms,
+                             attr.bedrooms >= numofbedrooms,
+                             attr.beds >= numofbeds
+                      )
     return(combinedData)
   } else{
-    combinedData <- filter(combinedData,
-                   attr.occupancy >= guests,
-                   attr.bathrooms >= numofbathrooms,
-                   attr.bedrooms >= numofbedrooms,
-                   attr.beds >= numofbeds)
+    combinedData <- combinedData %>%
+                      filter(attr.occupancy >= guests,
+                             attr.bathrooms >= numofbathrooms,
+                             attr.bedrooms >= numofbedrooms,
+                             attr.beds >= numofbeds
+                      )
     return(combinedData)
   }
 }
 
+pasteURL <- function(lat, lng, maxdistance, provider, pagenum) {
+  query <- paste0(
+    "&latitude=", lat,
+    "&longitude=", lng,
+    "&maxdistance=", maxdistance,
+    "&provider=", provider,
+    "&resultsperpage=", 50,
+    "&page=", pagenum 
+  )
+  return(query)
+}
 
 
 

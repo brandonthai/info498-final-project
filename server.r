@@ -5,7 +5,7 @@ library(plotly)
 source('scripts/build_map.r')
 source('scripts/build_chart1.r')
 source('scripts/build_chart2.r')
-source('scripts/chart3.r')
+source('scripts/build_chart3.r')
 
 shinyServer(function(input, output) {
   # Create a map via your build_map function when submit button is clicked
@@ -18,10 +18,7 @@ shinyServer(function(input, output) {
     searchMessage <- paste0("Looking for rentals in ", input$city, ", ", input$state,".", " Please Wait...")
      
     progress$set(message = searchMessage)
-    return(list(userCity = capitalize(input$city),
-                  userState = toupper(input$state)
-                  )
-             )
+    return(list(userCity = capitalize(input$city), userState = toupper(input$state)))
   })
   
   # Display the map to UI 
@@ -38,8 +35,6 @@ shinyServer(function(input, output) {
       numofbathrooms = input$numofbathrooms,
       numofbedrooms = input$numofbedrooms,
       numofbeds = input$numofbeds
-      #pricemax = input$price[1],
-      #pricemin = input$price[2]
     ))
   })
   
@@ -56,8 +51,6 @@ shinyServer(function(input, output) {
       numofbathrooms = input$numofbathrooms,
       numofbedrooms = input$numofbedrooms,
       numofbeds = input$numofbeds
-      #pricemax = input$price[1],
-      #pricemin = input$price[2]
     ))
   })
   
@@ -74,8 +67,6 @@ shinyServer(function(input, output) {
       numofbathrooms = input$numofbathrooms,
       numofbedrooms = input$numofbedrooms,
       numofbeds = input$numofbeds
-      #pricemax = input$price[1],
-      #pricemin = input$price[2]
     ))
   })
   
@@ -92,8 +83,6 @@ shinyServer(function(input, output) {
       numofbathrooms = input$numofbathrooms,
       numofbedrooms = input$numofbedrooms,
       numofbeds = input$numofbeds
-      #pricemax = input$price[1],
-      #pricemin = input$price[2]
     ))
   })
 })

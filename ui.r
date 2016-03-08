@@ -9,14 +9,17 @@ providers <- c("airbnb", "alwaysonvacation", "apartmentsapart",
                "hostelworld", "housetrip", "interhome",
                "nflats", "roomorama", "stopsleepgo",
                "theotherhome", "travelmob", "vacationrentalpeople",
-               "vaycayhero", "waytostay", "webchalet", "zaranga")
+               "vaycayhero", "waytostay", "webchalet", "zaranga"
+               )
 
 
 # Define UI for application that draws a histogram
 shinyUI(
   fluidPage(
     # Application title
-    titlePanel("Hello Shiny!"),
+    h1("Rental Finder:", align = "center"),
+    h3("Discover Your Dream Rental", align = "center"),
+    br(),
     fluidRow(
       column(3,
           wellPanel(
@@ -37,14 +40,17 @@ shinyUI(
       ),
       column(9,
           leafletOutput('mymap', height = 700),
-          plotlyOutput('mychart'),
-          plotlyOutput('mychart2'),
-          plotlyOutput('mychart3')
+          br(),
+          column(4, plotlyOutput('mychart')),
+          column(4, plotlyOutput('mychart3')),
+          column(4, plotlyOutput('mychart2'))
+      ),
+      column(9,
+             br()
       )
     )
   )
 )
-
 
 
 

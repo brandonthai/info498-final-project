@@ -1,6 +1,6 @@
 library(dplyr)
 library(leaflet)
-source('scripts/apiQuery.r')
+source('scripts/api_query.r')
 
 build_map <- function(queryData) {
   data <- get_data(queryData)
@@ -46,7 +46,7 @@ build_map <- function(queryData) {
                                  data$price.monthly,
                                  data$provider.url,
                                  data$photos
-                                 )
+                          )
                  )
   } else {
     map <- leaflet() %>%
