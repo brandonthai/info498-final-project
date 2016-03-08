@@ -1,5 +1,6 @@
 library(shiny)
 library(leaflet)
+library(plotly)
 
 providers <- c("airbnb", "alwaysonvacation", "apartmentsapart",
                "bedycasa", "bookingpal", "citiesreference",
@@ -35,7 +36,8 @@ shinyUI(
           )
       ),
       column(9,
-          leafletOutput('mymap', height = 700)
+          leafletOutput('mymap', height = 700),
+          plotlyOutput('mychart')
       )
     )
   )

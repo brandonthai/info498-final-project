@@ -1,7 +1,9 @@
 library(shiny)
 library(leaflet)
 library(Hmisc)
+library(plotly)
 source('scripts/build_map.r')
+source('scripts/build_chart1.r')
 
 shinyServer(function(input, output) {
   # Create a map via your build_map function when submit button is clicked
@@ -25,6 +27,24 @@ shinyServer(function(input, output) {
     location <- displayMap()
     
     build_map(queryData <- list(
+      city = location$userCity,
+      state = location$userState,
+      guests = input$guests,
+      provider = input$provider,
+      isinstantbook = input$isinstantbook,
+      maxdistance = input$maxdistance,
+      numofbathrooms = input$numofbathrooms,
+      numofbedrooms = input$numofbedrooms,
+      numofbeds = input$numofbeds
+      #pricemax = input$price[1],
+      #pricemin = input$price[2]
+    ))
+  })
+  
+  output$mychart <- renderPlotly({
+    location <- displayMap()
+    
+    build_chart(queryData <- list(
       city = location$userCity,
       state = location$userState,
       guests = input$guests,
