@@ -5,10 +5,10 @@ source('scripts/api_query.r')
 build_map <- function(queryData) {
   #Get data frame from API
   data <- get_data(queryData)
-  #View(data)
   
   #Only get the LAT/LNG of location if data is not null
-  if(!is.null(nrow(data))) {
+  if(nrow(data) != 0 && !is.null(nrow(data))) {
+    print(nrow(data))
     lat <- unlist(lapply(data$latLng, unlist))[seq(1, nrow(data)*2, 2)]
     lng <- unlist(lapply(data$latLng, unlist))[seq(2, nrow(data)*2, 2)]
     data$latitude = lat
@@ -16,7 +16,7 @@ build_map <- function(queryData) {
   }
   
   #Create the popup window with following information
-  content <- function(heading, beds, bedrooms, bathrooms, nightly, weekly, monthly, link, photo){
+  content <- function(heading, beds, bedrooms, bathrooms, nightly, weekly, monthly, link){
     paste(sep = '',
           '<h4>', heading, '</h4>',
           '<h5>Number of beds: ', beds, '</h5>',
@@ -25,8 +25,8 @@ build_map <- function(queryData) {
           '<h5>Price per night: $', nightly, '</h5>',
           '<h5>Price per week: $', weekly, '</h5>',
           '<h5>Price per month: $', monthly, '</h5>',
-          "<a href='", link, "'>Link to provider's listing.</a> </br> </br>",
-          '<img heigth=150, width=150, src="', unlist(photo), '">'
+          "<a href='", link, "'>Link to provider's listing.</a> </br> </br>"
+          #'<img heigth=150, width=150, src="', unlist(photo), '">'
     )
   }
   
@@ -37,7 +37,7 @@ build_map <- function(queryData) {
   
   #If data frame is null then display blank map of location
   #Else dislay map with markers of rentals
-  if(is.null(nrow(data))) {
+  if(nrow(data) == 0 || is.null(nrow(data))) {
     map <- leaflet() %>%
       addTiles() %>%  # Add default OpenStreetMap map tiles
       setView(lng = cityLng, lat = cityLat, zoom = 12)
@@ -55,8 +55,8 @@ build_map <- function(queryData) {
                                  data$price.nightly,
                                  data$price.weekly,
                                  data$price.monthly,
-                                 data$provider.url,
-                                 data$photos
+                                 data$provider.url
+                                 #data$photos
                  )
       )
   }
