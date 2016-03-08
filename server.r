@@ -76,6 +76,8 @@ shinyServer(function(input, output) {
       #pricemin = input$price[2]
     ))
   })
+  
+  
 })
 
 
