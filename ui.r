@@ -37,7 +37,8 @@ shinyUI(
       ),
       column(9,
           leafletOutput('mymap', height = 700),
-          plotlyOutput('mychart')
+          plotlyOutput('mychart'),
+          plotlyOutput('mychart2')
       )
     )
   )

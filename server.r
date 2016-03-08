@@ -58,6 +58,24 @@ shinyServer(function(input, output) {
       #pricemin = input$price[2]
     ))
   })
+  
+  output$mychart2 <- renderPlotly({
+    location <- displayMap()
+    
+    build_chart2(queryData <- list(
+      city = location$userCity,
+      state = location$userState,
+      guests = input$guests,
+      provider = input$provider,
+      isinstantbook = input$isinstantbook,
+      maxdistance = input$maxdistance,
+      numofbathrooms = input$numofbathrooms,
+      numofbedrooms = input$numofbedrooms,
+      numofbeds = input$numofbeds
+      #pricemax = input$price[1],
+      #pricemin = input$price[2]
+    ))
+  })
 })
 
 
