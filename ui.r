@@ -2,6 +2,7 @@ library(shiny)
 library(leaflet)
 library(plotly)
 
+#List of rental providers
 providers <- c("airbnb", "alwaysonvacation", "apartmentsapart",
                "bedycasa", "bookingpal", "citiesreference",
                "edomizil", "geronimo", "gloveler",
@@ -21,12 +22,15 @@ shinyUI(
     h3("Discover Your Dream Rental", align = "center"),
     br(),
     fluidRow(
+      #Sidepanel for searching and filtering
       column(3,
+          #Panel for searching
           wellPanel(
             textInput("city", "Enter a city (ie. Seattle):", value = 'Chelan'),
             textInput("state", "Enter a state (ie. WA):", value = 'WA'),
             actionButton("submit", "Search")
           ),
+          #Panel for filtering results
           wellPanel(
             h3("Filter Results"),
             checkboxInput("isinstantbook", label = "Check for Instant Book only", value = FALSE),
@@ -38,20 +42,21 @@ shinyUI(
             sliderInput("maxdistance", label = "Search Radius (Km):", min = 1, max = 35, value = 5, step = 1)
           )
       ),
+      #Renders map and charts
       column(9,
-          leafletOutput('mymap', height = 700),
+          leafletOutput('map', height = 700),
           br(),
-          column(4, plotlyOutput('mychart')),
-          column(4, plotlyOutput('mychart3')),
-          column(4, plotlyOutput('mychart2'))
+          column(4, plotlyOutput('chart')),
+          column(4, plotlyOutput('chart3')),
+          column(4, plotlyOutput('chart2'))
       ),
+      #Footer padding
       column(9,
              br()
       )
     )
   )
 )
-
 
 
 

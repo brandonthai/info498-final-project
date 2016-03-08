@@ -3,8 +3,11 @@ library(leaflet)
 source('scripts/api_query.r')
 
 build_map <- function(queryData) {
+  #Get data frame from API
   data <- get_data(queryData)
   #View(data)
+  
+  #Only get the LAT/LNG of location if data is not null
   if(!is.null(nrow(data))) {
     lat <- unlist(lapply(data$latLng, unlist))[seq(1, nrow(data)*2, 2)]
     lng <- unlist(lapply(data$latLng, unlist))[seq(2, nrow(data)*2, 2)]
@@ -12,6 +15,7 @@ build_map <- function(queryData) {
     data$longitude = lng
   }
   
+  #Create the popup window with following information
   content <- function(heading, beds, bedrooms, bathrooms, nightly, weekly, monthly, link, photo){
     paste(sep = '',
           '<h4>', heading, '</h4>',
@@ -26,11 +30,18 @@ build_map <- function(queryData) {
     )
   }
   
+  #Get LAT/LNG of user's inputed city, state
   latlng <- getLatLng(queryData$city, queryData$state)
   cityLat <- latlng$lat
   cityLng <- latlng$lon
   
-  if(!is.null(nrow(data))) {
+  #If data frame is null then display blank map of location
+  #Else dislay map with markers of rentals
+  if(is.null(nrow(data))) {
+    map <- leaflet() %>%
+      addTiles() %>%  # Add default OpenStreetMap map tiles
+      setView(lng = cityLng, lat = cityLat, zoom = 12)
+  } else {
     map <- leaflet() %>%
       addTiles() %>%  # Add default OpenStreetMap map tiles
       addMarkers(data,
@@ -46,19 +57,13 @@ build_map <- function(queryData) {
                                  data$price.monthly,
                                  data$provider.url,
                                  data$photos
-                          )
                  )
-  } else {
-    map <- leaflet() %>%
-      addTiles() %>%  # Add default OpenStreetMap map tiles
-      setView(lng = cityLng, lat = cityLat, zoom = 12)
+      )
   }
   return(map)
 }
 
   
   
-
-
 
 
