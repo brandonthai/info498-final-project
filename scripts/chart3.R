@@ -13,7 +13,7 @@ get_chart3 <- function(queryData){
                y = meanofprice,
                type = 'bar'
   ) %>%
-    layout(xaxis = list(title = "Property Type"), yaxis = list(title = "Avg. Price"), 
+    layout(xaxis = list(title = "Property Type"), yaxis = list(title = "Avg. Price Monthly"), 
            title = "Average Prices for Property Types")
     return(p)
 }
