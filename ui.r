@@ -18,7 +18,8 @@ providers <- c("airbnb", "alwaysonvacation", "apartmentsapart",
 shinyUI(
   fluidPage(
     # Application title
-    h1("Rental Finder:", align = "center"),
+    titlePanel("", windowTitle = "Rental Finder"),
+    h1("Rental Finder:", align = "center", windowTitle = "Rental Finder"),
     h3("Discover Your Dream Rental", align = "center"),
     br(),
     fluidRow(
