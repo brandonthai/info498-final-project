@@ -2,8 +2,6 @@ library(dplyr)
 library(plotly)
 source('scripts/apiQuery.R')
 
-data <- get_data(queryData)
-
 # function
 get_chart3 <- function(queryData){
   data <- get_data(queryData)

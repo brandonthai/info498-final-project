@@ -4,6 +4,8 @@ library(Hmisc)
 library(plotly)
 source('scripts/build_map.r')
 source('scripts/build_chart1.r')
+source('scripts/build_chart2.r')
+source('scripts/chart3.r')
 
 shinyServer(function(input, output) {
   # Create a map via your build_map function when submit button is clicked
@@ -80,7 +82,7 @@ shinyServer(function(input, output) {
   output$mychart3 <- renderPlotly({
     location <- displayMap()
     
-    build_chart3(queryData <- list(
+    get_chart3(queryData <- list(
       city = location$userCity,
       state = location$userState,
       guests = input$guests,
