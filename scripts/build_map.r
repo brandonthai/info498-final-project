@@ -10,7 +10,7 @@ build_map <- function(queryData) {
   data <- data %>%
             rowwise() %>%
             mutate(displayPhoto = unlist(photos)[1])
-  View(data)
+  #View(data)
   
   
   #Only get the LAT/LNG of location if data is not null
