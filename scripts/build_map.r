@@ -6,6 +6,13 @@ build_map <- function(queryData) {
   #Get data frame from API
   data <- get_data(queryData)
   
+  # Unlist photo and grabs one large photo for popup
+  data <- data %>%
+            rowwise() %>%
+            mutate(displayPhoto = unlist(photos)[1])
+  View(data)
+  
+  
   #Only get the LAT/LNG of location if data is not null
   if(nrow(data) != 0 && !is.null(nrow(data))) {
     print(nrow(data))
@@ -16,7 +23,7 @@ build_map <- function(queryData) {
   }
   
   #Create the popup window with following information
-  content <- function(heading, beds, bedrooms, bathrooms, nightly, weekly, monthly, link){
+  content <- function(heading, beds, bedrooms, bathrooms, nightly, weekly, monthly, link, photo){
     paste(sep = '',
           '<h4>', heading, '</h4>',
           '<h5>Number of beds: ', beds, '</h5>',
@@ -25,8 +32,8 @@ build_map <- function(queryData) {
           '<h5>Price per night: $', nightly, '</h5>',
           '<h5>Price per week: $', weekly, '</h5>',
           '<h5>Price per month: $', monthly, '</h5>',
-          "<a href='", link, "'>Link to provider's listing.</a> </br> </br>"
-          #'<img heigth=150, width=150, src="', unlist(photo), '">'
+          "<a href='", link, "'>Link to provider's listing.</a> </br> </br>",
+          '<img heigth=150, width=150, src="', photo, '">'
     )
   }
   
@@ -55,8 +62,8 @@ build_map <- function(queryData) {
                                  data$price.nightly,
                                  data$price.weekly,
                                  data$price.monthly,
-                                 data$provider.url
-                                 #data$photos
+                                 data$provider.url,
+                                 data$displayPhoto
                  )
       )
   }
