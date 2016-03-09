@@ -49,7 +49,8 @@ shinyUI(
           br(),
           column(4, plotlyOutput('chart')),
           column(4, plotlyOutput('chart3')),
-          column(4, plotlyOutput('chart2'))
+          column(4, plotlyOutput('chart2')),
+          br()
       ),
       #Footer padding
       column(9,

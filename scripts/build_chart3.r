@@ -13,7 +13,7 @@ build_chart3 <- function(queryData) {
           ) %>%
       layout(xaxis = list(title = "Property Type"),
              yaxis = list(title = "Avg. Price Nightly"),
-             title = "Average Nightly Prices per Property Types"
+             title = "Avg. Nightly Prices by Property Types"
       )
     return(p)
   } else {
@@ -31,7 +31,7 @@ build_chart3 <- function(queryData) {
           ) %>%
           layout(xaxis = list(title = "Property Type"),
                  yaxis = list(title = "Avg. Price Nightly"),
-                 title = "Average Nightly Prices per Property Types"
+                 title = "Avg. Nightly Prices by Property Types"
           )
       return(p)
   }

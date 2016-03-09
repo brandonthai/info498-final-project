@@ -1,6 +1,8 @@
 library(jsonlite)
 source('scripts/get_lat_lng.r')
 
+# This function will call to the API and query for the information 
+# requested to the user
 get_data <- function(queryData) {
   base_url <- "https://zilyo.p.mashape.com/search?"
   key_parameter <- "mashape-key="

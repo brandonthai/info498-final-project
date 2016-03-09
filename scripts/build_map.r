@@ -49,12 +49,11 @@ build_map <- function(queryData) {
       addTiles() %>%  # Add default OpenStreetMap map tiles
       setView(lng = cityLng, lat = cityLat, zoom = 12)
   } else {
-    map <- leaflet() %>%
+    map <- leaflet(data) %>%
       addTiles() %>%  # Add default OpenStreetMap map tiles
-      addMarkers(data,
-                 lat = data$latitude,
+      addMarkers(clusterOptions = markerClusterOptions(),
                  lng = data$longitude,
-                 #clusterOptions = markerClusterOptions(),
+                 lat = data$latitude,
                  popup = content(data$attr.heading,
                                  data$attr.beds,
                                  data$attr.bedrooms,
