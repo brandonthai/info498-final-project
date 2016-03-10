@@ -32,7 +32,7 @@ build_map <- function(queryData) {
           '<h5>Price per night: $', nightly, '</h5>',
           '<h5>Price per week: $', weekly, '</h5>',
           '<h5>Price per month: $', monthly, '</h5>',
-          "<a href='", link, "'>Link to provider's listing.</a> </br> </br>",
+          "<a href='", link, "', target='_blank'>Link to provider's listing.</a> </br> </br>",
           '<img heigth=150, width=150, src="', photo, '">'
     )
   }
